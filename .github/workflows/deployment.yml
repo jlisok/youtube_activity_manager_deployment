@@ -14,5 +14,5 @@ jobs:
       
       - name: run deployment
         run: |
-          chmod +x ci/deploy.sh,
-          ./ci/deploy.sh.
+          chmod +x ci/deploy.sh
+          ./ci/deploy.sh
