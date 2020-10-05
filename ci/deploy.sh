@@ -9,10 +9,10 @@ eval $(ssh-agent)
 ssh-add - <<< "${EC2_SECRET}"
 
 # scp to ec2 the docker-compose.yml as docker-compose.yml.new
-scp -o "${SCRIPT_DIR}"/../aws/docker-compose.yml ec2-user@ec2-3-120-244-69.eu-central-1.compute.amazonaws.com:docker-compose.yml.new
+scp -o StrictHostKeyChecking=no "${SCRIPT_DIR}"/../aws/docker-compose.yml ec2-user@ec2-3-120-244-69.eu-central-1.compute.amazonaws.com:docker-compose.yml.new
 
 # ssh to aws ec2 (you'll need to have to add the .pem key to github somehow)
-ssh -o ec2-user@ec2-3-120-244-69.eu-central-1.compute.amazonaws.com
+ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-120-244-69.eu-central-1.compute.amazonaws.com
 
 # login to ecr
 aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 955603615851.dkr.ecr.eu-central-1.amazonaws.com
