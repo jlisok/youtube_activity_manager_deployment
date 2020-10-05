@@ -5,7 +5,7 @@ set -xe
 if [ -z ${EC2_SECRET+x} ]; then exit 1; fi
 
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-TIMESTAMP=$(date --rfc-3339=ns)
+DURATION=1m
 
 eval $(ssh-agent)
 ssh-add - <<< "${EC2_SECRET}"
@@ -39,7 +39,7 @@ ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-120-244-69.eu-central-1.compute.a
   rm docker-compose.yml.old
 
   # remove old containers (docker system prune (+ make sure not to delete too new images, just in case))
-  docker system prune --filter "util=${TIMESTAMP}"
+  docker system prune --filter "util=${DURATION}"
 
 EOF
 # profit!
