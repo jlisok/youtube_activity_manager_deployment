@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -xe
+
 if [ -z ${EC2_SECRET+x} ]; then exit 1; fi
 
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
@@ -12,30 +14,32 @@ ssh-add - <<< "${EC2_SECRET}"
 scp -o StrictHostKeyChecking=no "${SCRIPT_DIR}"/../aws/docker-compose.yml ec2-user@ec2-3-120-244-69.eu-central-1.compute.amazonaws.com:docker-compose.yml.new
 
 # ssh to aws ec2 (you'll need to have to add the .pem key to github somehow)
-ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-120-244-69.eu-central-1.compute.amazonaws.com
+ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-120-244-69.eu-central-1.compute.amazonaws.com << EOF
+  set -xe
 
-# login to ecr
-aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 955603615851.dkr.ecr.eu-central-1.amazonaws.com
+  # login to ecr
+  aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 955603615851.dkr.ecr.eu-central-1.amazonaws.com
 
-# pull new images from ecr (docker-compose -f docker-compose.yml.new pull)
-docker-compose -f docker-compose.yml.new pull
+  # pull new images from ecr (docker-compose -f docker-compose.yml.new pull)
+  docker-compose -f docker-compose.yml.new pull
 
-# stop running containers (down)
-docker-compose -f docker-compose.yml down
+  # stop running containers (down)
+  docker-compose -f docker-compose.yml down
 
-# rename old compose file (.old)
-mv docker-compose.yml docker-compose.yml.old
+  # rename old compose file (.old)
+  mv docker-compose.yml docker-compose.yml.old
 
-# rename new compose file
-mv docker-compose.yml.new docker-compose.yml
+  # rename new compose file
+  mv docker-compose.yml.new docker-compose.yml
 
-# start new containers (up -d)
-docker-compose -f docker-compose.yml up -d
+  # start new containers (up -d)
+  docker-compose -f docker-compose.yml up -d
 
-# remove old compose file
-rm docker-compose.yml.old
+  # remove old compose file
+  rm docker-compose.yml.old
 
-# remove old containers (docker system prune (+ make sure not to delete too new images, just in case))
-docker system prune --filter "util=${TIMESTAMP}"
+  # remove old containers (docker system prune (+ make sure not to delete too new images, just in case))
+  docker system prune --filter "util=${TIMESTAMP}"
 
+EOF
 # profit!
