@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
+if [ -z ${EC2_SECRET+x} ]; then exit 1; fi
+
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
-EC2_SECRET="${secrets.EC2_KEY}"
 TIMESTAMP=$(date --rfc-3339=ns)
 
 eval $(ssh-agent)
