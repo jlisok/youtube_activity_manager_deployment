@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env: 
+      EC2_SECRET: ${{ secrets.EC2_KEY }}
 
     steps:
       - uses: actions/checkout@v2
