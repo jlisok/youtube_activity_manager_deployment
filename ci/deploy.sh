@@ -12,10 +12,8 @@ ssh-add - <<< "${EC2_SECRET}"
 
 # substitute environment variables in docker-compose.yml
 DOCKER_COMPOSE="${SCRIPT_DIR}"/../aws/docker-compose.yml
-envsubst < "${DOCKER_COMPOSE}" | tee "${DOCKER_COMPOSE}"
-
-# TODO: temp log
-cat "${DOCKER_COMPOSE}"
+envsubst < "${DOCKER_COMPOSE}" > "${DOCKER_COMPOSE}".tmp
+mv "${DOCKER_COMPOSE}".tmp "${DOCKER_COMPOSE}"
 
 # scp to ec2 the docker-compose.yml as docker-compose.yml.new
 scp -o StrictHostKeyChecking=no "${DOCKER_COMPOSE}" ec2-user@ec2-3-120-244-69.eu-central-1.compute.amazonaws.com:docker-compose.yml.new
