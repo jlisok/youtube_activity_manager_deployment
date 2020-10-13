@@ -44,7 +44,8 @@ ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-120-244-69.eu-central-1.compute.a
   rm docker-compose.yml.old
 
   # remove old containers (docker system prune (+ make sure not to delete too new images, just in case))
-  docker system prune --filter "util=${DURATION}"
+  # do not ask for confirmation (--force)
+  docker system prune --force --filter "util=${DURATION}"
 
 EOF
 # profit!
