@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       EC2_SECRET: ${{ secrets.EC2_KEY }}
+      DB_PASSWORD: ${{ secrets.EC2_DB_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v2
