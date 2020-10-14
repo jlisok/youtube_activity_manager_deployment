@@ -20,4 +20,4 @@ services:
     ports:
       - "80:80"
     environment: 
-      API_URL: https://www.jlisok.pl
+      API_URL: https://jlisok.pl
