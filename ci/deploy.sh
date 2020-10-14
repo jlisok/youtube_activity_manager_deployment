@@ -45,7 +45,7 @@ ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-120-244-69.eu-central-1.compute.a
 
   # remove old containers (docker system prune (+ make sure not to delete too new images, just in case))
   # do not ask for confirmation (--force)
-  docker system prune --force --filter "util=${DURATION}"
+  docker system prune --force --filter "until=${DURATION}"
 
 EOF
 # profit!
