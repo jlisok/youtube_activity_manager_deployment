@@ -17,6 +17,7 @@ services:
       driver: awslogs
       options:
         awslogs-region: eu-central-1
+        awslogs-group: youtube-activity-manager
 
   frontend:
     image: "955603615851.dkr.ecr.eu-central-1.amazonaws.com/com.jlisok/youtube_activity_manager_frontend:0.0.1-SNAPSHOT"
@@ -28,3 +29,4 @@ services:
       driver: awslogs
       options:
         awslogs-region: eu-central-1
+        awslogs-group: youtube-activity-manager-frontend
