@@ -13,7 +13,10 @@ services:
       DB_USERNAME: postgres
       DB_PASSWORD: ${DB_PASSWORD}
       FRONTEND_URL: https://www.jlisok.pl
-
+    logging:
+      driver: awslogs
+      options:
+        awslogs-region:eu-central-1
 
   frontend:
     image: "955603615851.dkr.ecr.eu-central-1.amazonaws.com/com.jlisok/youtube_activity_manager_frontend:0.0.1-SNAPSHOT"
@@ -21,3 +24,7 @@ services:
       - "80:80"
     environment: 
       API_URL: https://jlisok.pl
+    logging:
+      driver: awslogs
+      options:
+        awslogs-region:eu-central-1
