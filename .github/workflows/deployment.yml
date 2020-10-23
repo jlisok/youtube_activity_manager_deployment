@@ -8,6 +8,8 @@ jobs:
     env: 
       EC2_SECRET: ${{ secrets.EC2_KEY }}
       DB_PASSWORD: ${{ secrets.EC2_DB_PASSWORD }}
+      AWS_S3_ACCESS_KEY_ID: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
+      AWS_S3_SECRET_ACCESS_KEY_ID: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY_ID }}
 
     steps:
       - uses: actions/checkout@v2
