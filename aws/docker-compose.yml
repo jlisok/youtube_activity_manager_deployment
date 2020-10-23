@@ -17,6 +17,7 @@ services:
       AWS_S3_SECRET_ACCESS_KEY_ID: ${AWS_S3_SECRET_ACCESS_KEY_ID}
       AWS_REGION: eu-central-1
       AWS_BUCKET_NAME: com.jlisok.youtube-activity-manager.cloud-data
+      URL_TO_GOOGLE_CREDENTIALS: ${URL_TO_GOOGLE_CREDENTIALS}
       
     logging:
       driver: awslogs
