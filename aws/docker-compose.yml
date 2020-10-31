@@ -31,6 +31,7 @@ services:
       - "80:80"
     environment: 
       API_URL: https://jlisok.pl
+      STATIC_RESOURCE_URL: https://d2xvpza2vzjrcj.cloudfront.net
     logging:
       driver: awslogs
       options:
