@@ -18,6 +18,7 @@ services:
       AWS_REGION: eu-central-1
       AWS_BUCKET_NAME: com.jlisok.youtube-activity-manager.cloud-data
       GOOGLE_CLIENT_ID: 845161221251-8qcjjnqm3a568p0m9alajv2kaa514jot.apps.googleusercontent.com
+      DEMO_USER_EMAIL: alpaca@lover.com
       
     logging:
       driver: awslogs
