@@ -16,10 +16,10 @@ envsubst < "${DOCKER_COMPOSE}" > "${DOCKER_COMPOSE}".tmp
 mv "${DOCKER_COMPOSE}".tmp "${DOCKER_COMPOSE}"
 
 # scp to ec2 the docker-compose.yml as docker-compose.yml.new
-scp -o StrictHostKeyChecking=no "${DOCKER_COMPOSE}" ec2-user@ec2-3-120-244-69.eu-central-1.compute.amazonaws.com:docker-compose.yml.new
+scp -o StrictHostKeyChecking=no "${DOCKER_COMPOSE}" "${EC2_USER}"@"${EC2_IP}":docker-compose.yml.new
 
 # ssh to aws ec2 (you'll need to have to add the .pem key to github somehow)
-ssh -o StrictHostKeyChecking=no ec2-user@52.59.218.254 << EOF
+ssh -o StrictHostKeyChecking=no "${EC2_USER}"@"${EC2_IP}" << EOF
   set -xe
 
   # login to ecr
